@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
 
   @Input() switchOrgParams: any = {}
 
-  @Input() ajsState: any
-
   @Output() credentials: EventEmitter<{emailId: string, password: string}> = new EventEmitter()
 
   
@@ -44,13 +42,11 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-    console.log('onSubmit called', this.emailId, this.password)
-    // this.credentials.emit({emailId: this.emailId, password: this.password})
-    // this.ajsState.go('switch_org', this.switchOrgParams)
-    const routerAuthService = this.angularJSService.getResource('RouterAuthService')
+    const routerAuthService = this.angularJSService.getResource('RouterAuthService');
+    const $state = this.angularJSService.getResource('RouterAuthService');
     routerAuthService.basicSignin(this.emailId, this.password).then(() => {
       this.setEou().then(() => {
-        this.ajsState.go('switch_org')
+        $state.go('switch_org')
       })
     })
     // this.router.navigate(['auth/switch_org'])

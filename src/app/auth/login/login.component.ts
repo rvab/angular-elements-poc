@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const routerAuthService = this.angularJSService.getResource('RouterAuthService');
-    const $state = this.angularJSService.getResource('RouterAuthService');
+    const $state = this.angularJSService.getResource('$state');
     routerAuthService.basicSignin(this.emailId, this.password).then(() => {
       this.setEou().then(() => {
         $state.go('switch_org')
